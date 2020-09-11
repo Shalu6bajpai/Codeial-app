@@ -3,7 +3,8 @@ const router=express.Router();
 const homeController=require('../controllers/home_controller');
 
 
-//for any further router file we use router.use
+router.get('/',homeController.home);
+//further use for routers
 router.use('/users',require('./users'));
 
 
