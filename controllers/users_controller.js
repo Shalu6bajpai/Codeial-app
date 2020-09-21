@@ -1,30 +1,38 @@
+const User = require('../models/user');
 
-const User=require('../models/user');
-module.exports.profile=function(req,res){
-    //return res.end('<h1>profile</h1>');
-    return res.render('user',{
-        title:"user"
-    });
+
+module.exports.profile = function(req, res){
+    return res.render('profile', {
+        title: 'User Profile'
+    })
 }
-module.exports.sign_up=function(req,res){
-    //return res.end('<h1>profile</h1>');
-    if(req.isAuthenticated()){
-                return  res.redirect('/users/profile');
+
+
+// render the sign up page
+module.exports.signUp = function(req, res){
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile');
     }
-    return res.render('sign_up',{
-        title:"sign_up"
-    });
+
+
+    return res.render('sign_up', {
+        title: "Codeial | Sign Up"
+    })
 }
-module.exports.sign_in=function(req,res){
-    //return res.end('<h1>profile</h1>');
-    if(req.isAuthenticated()){
-      return  res.redirect('/users/profile');
+
+
+// render the sign in page
+module.exports.signIn = function(req, res){
+
+    if (req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    return res.render('sign_in', {
+        title: "Codeial | Sign In"
+    })
 }
-    return res.render('sign_in',{
-        title:"sign_in"
-    });
-}
-//get the sign-up data
+
+// get the sign up data
 module.exports.create = function(req, res){
     if (req.body.password != req.body.confirm_password){
         return res.redirect('back');
@@ -46,10 +54,14 @@ module.exports.create = function(req, res){
     });
 }
 
-    
 
+// sign in and create a session for the user
+module.exports.createSession = function(req, res){
+    return res.redirect('/users/profile');
+}
 
-//sign-in  and create the seesion
-module.exports.createsession=function(req,res){
-         return res.redirect('/');
+module.exports.destroySession = function(req, res){
+    req.logout();
+
+    return res.redirect('/');
 }
