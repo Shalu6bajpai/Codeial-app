@@ -77,4 +77,3 @@ app.listen(port,function(err){
         console.log('server is running on port:',port);
     }
 });
-//kya issue hai ?>>actually when i m signing up cookies is created but not redirection to the sign-in page
