@@ -10,6 +10,8 @@ const passportLocalStrategy=require('./config/passport-local-strategy');
 const db = require('./config/mongoose');
 const MongoStore=require('connect-mongo')(session);
 const sassMiddleware =require('node-sass-middleware');
+const flash=require('connect-flash');
+const customMiddleware=require('./config/middleware');
 app.use(sassMiddleware({
    src:'./assests/scss',
    dest:'./assests/css',
@@ -21,19 +23,12 @@ app.use(sassMiddleware({
 app.use(express.urlencoded());
 app.use(cookieParser());
 
-
+//assests folder use
 app.use(express.static('./assests'));
 app.use(expressLayouts);
-
-
 //extract style and scripts from sub pages into the layout
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
-
-
-
-
-
 //setup the view engine
 app.set('view engine','ejs');
 app.set('views','./views');
@@ -62,11 +57,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(customMiddleware.setFlash);
 
 //Use express router
 app.use('/',require('./routes'));
-
-
 
 //Listening to port
 app.listen(port,function(err){

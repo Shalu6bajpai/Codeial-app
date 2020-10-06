@@ -1,6 +1,7 @@
 #home-container{
     display:flex;
-
+    border: 1px solid black;
+    
     #feed-posts{
         width:70%;
         padding:10px;
@@ -8,8 +9,8 @@
     }
     #user-friend{
         width:30%;
-        padding: 10px;
-        border-left:1px solid red;
+        padding: 20px;
+        border-left:2px solid grey;
         height:100%;
     }
 }
