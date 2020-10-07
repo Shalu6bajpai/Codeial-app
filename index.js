@@ -25,6 +25,8 @@ app.use(cookieParser());
 
 //assests folder use
 app.use(express.static('./assests'));
+//make the uploads available to borrow
+app.use('/uploads',express.static(__dirname + '/uploads'));
 app.use(expressLayouts);
 //extract style and scripts from sub pages into the layout
 app.set('layout extractStyles',true);
